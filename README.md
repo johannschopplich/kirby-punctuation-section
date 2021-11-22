@@ -6,7 +6,7 @@ This plugin provides a simple, **configurable** section for your Kirby project f
 
 ## Requirements
 
-- Kirby 3.6+
+- Kirby 3.5+
 
 ## Installation
 
