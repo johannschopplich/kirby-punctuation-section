@@ -1,0 +1,37 @@
+{
+  "name": "johannschopplich/kirby-punctuation-section",
+  "description": "Copy commonly used characters to your clipboard for improved typography",
+  "type": "kirby-plugin",
+  "version": "1.0.0",
+  "keywords": [
+    "kirby",
+    "typography",
+    "punctuation",
+    "clipboard"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/johannschopplich/kirby-punctuation-section#readme",
+  "authors": [
+    {
+      "name": "Johann Schopplich",
+      "email": "pkg@johannschopplich.com",
+      "homepage": "https://johannschopplich.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4.0",
+    "getkirby/composer-installer": "^1.2"
+  },
+  "require-dev": {
+    "getkirby/cms": "^3.6"
+  },
+  "scripts": {
+    "dist": "composer install --no-dev --optimize-autoloader"
+  },
+  "config": {
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "kirby-cms-path": false
+  }
+}
