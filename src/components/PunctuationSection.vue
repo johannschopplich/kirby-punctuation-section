@@ -48,7 +48,6 @@ export default {
 
   methods: {
     async handleClick({ target }) {
-      console.log(target);
       if (!target.matches("button")) return;
 
       try {
