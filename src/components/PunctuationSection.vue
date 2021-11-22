@@ -68,11 +68,11 @@ export default {
 
 <style>
 .k-button-character {
-  background-color: var(--color-gray-300);
-  border-radius: var(--rounded-sm);
+  background-color: var(--color-gray-300, #ddd);
+  border-radius: var(--rounded-sm, 0.125rem);
   font-size: 1.25em;
   font-family: serif;
-  padding: 0 var(--spacing-2);
+  padding: 0 var(--spacing-2, 0.5rem);
   touch-action: manipulation;
 }
 
