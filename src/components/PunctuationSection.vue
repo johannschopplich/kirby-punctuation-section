@@ -35,8 +35,8 @@ export default {
     this.theme = response.theme || "none";
     this.text = this.fieldsets
       .map(
-        ({ category, chars }) =>
-          `${category}: ${chars
+        ({ label, chars }) =>
+          `${label?.[this.$language.code] ?? Object.values(label)[0]}: ${chars
             .map(
               (i) =>
                 `<button class="k-button-character" type="button">${i}</button>`

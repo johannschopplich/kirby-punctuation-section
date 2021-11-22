@@ -1,6 +1,10 @@
 # Kirby Punctuation Section
 
-This plugin provides a simple, **configurable** section for your Kirby project from which your clients can quickly copy commonly used characters to the clipboard.
+This plugin provides a simple, **customizable** section for your Kirby project from which your clients can quickly copy commonly used characters to the clipboard.
+
+Translated labels are supported as well. See [usage](#usage) below.
+
+<br>
 
 ![Preview of Kirby punctuation section plugin](./.github/kirby-punctuation-section-preview.gif)
 
@@ -28,7 +32,28 @@ composer require johannschopplich/kirby-punctuation-section
 
 ## Usage
 
-Create a `section/punctuation-helper.yml` in your blueprints folder and paste the following example:
+Create a `section/punctuation-helper.yml` in your blueprints folder and add characters you want to provide for clipboard copying.
+
+A bare minimum section example:
+
+```yaml
+type: punctuation
+headline: Lil Punctuation Helper
+fieldsets:
+  - category:
+    label: German Quotation Marks
+    chars:
+      - "„"
+      - "‚"
+      - "‘"
+      - "“"
+```
+
+Or use a more full fledged example, including support for **label translations**:
+
+<details>
+
+<summary>👀 Complete example</summary>
 
 ```yaml
 type: punctuation
@@ -36,35 +61,53 @@ headline:
   de: Kleine Interpunktionshilfe
   en: Lil Punctuation Helper
 fieldsets:
-  - category: Apostroph
+  - category:
+    label:
+      de: Apostroph
+      en: Apostrophe
     chars:
       - "’"
-  - category: Gedankenstrich
+  - category:
+    label:
+      de: Gedankenstrich
+      en: Hyphen
     chars:
       - "–"
-  - category: Dt. Anführungszeichen
+  - category:
+    label:
+      de: Dt. Anführungszeichen
+      en: German Quotation Marks
     chars:
       - "„"
       - "‚"
       - "‘"
       - "“"
-  - category: Engl. Anführungszeichen
+  - category:
+    label:
+      de: Engl. Anführungszeichen
+      en: English Quotation Marks
     chars:
       - "“"
       - "‘"
       - "’"
       - "”"
-  - category: Guillemets
+  - category:
+    label: Guillemets
     chars:
       - "»"
       - "›"
       - "‹"
       - "«"
-  - category: Sonstiges
+  - category:
+    label:
+      de: Sonstiges
+      en: Other
     chars:
       - "…"
       - "×"
 ```
+
+</details>
 
 Now, you're already good to go! Of course, you probably want to adapt the characters to your needs.
 
