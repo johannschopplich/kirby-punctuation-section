@@ -2,7 +2,7 @@
   "name": "johannschopplich/kirby-punctuation-section",
   "description": "Copy commonly used characters to your clipboard",
   "type": "kirby-plugin",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "keywords": [
     "kirby",
     "typography",
