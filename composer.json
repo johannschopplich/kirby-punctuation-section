@@ -1,8 +1,8 @@
 {
   "name": "johannschopplich/kirby-punctuation-section",
-  "description": "Copy commonly used characters to your clipboard for improved typography",
+  "description": "Copy commonly used characters to your clipboard",
   "type": "kirby-plugin",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "keywords": [
     "kirby",
     "typography",
