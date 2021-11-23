@@ -32,7 +32,7 @@ export default {
   computed: {
     currentLanguage() {
       // `this.$language` is only available in Kirby 3.6+
-      return this?.$language ?? this.$store.state.languages.current;
+      return this.$store.state.languages?.current ?? this.$language;
     },
   },
 
@@ -46,7 +46,7 @@ export default {
           `${
             label === typeof "string"
               ? label
-              : label?.[this.currentLanguage.code] ?? Object.values(label)[0]
+              : label?.[this.currentLanguage?.code] ?? Object.values(label)[0]
           }: ${chars
             .map(
               (i) =>
