@@ -29,6 +29,12 @@ export default {
     };
   },
 
+  computed: {
+    currentLanguage() {
+      return this.$store.state?.languages?.current ?? this.$language;
+    },
+  },
+
   async created() {
     const response = await this.load();
     this.headline = response.headline;
@@ -36,7 +42,11 @@ export default {
     this.text = this.fieldsets
       .map(
         ({ label, chars }) =>
-          `${label?.[this.$language.code] ?? Object.values(label)[0]}: ${chars
+          `${
+            label === typeof "string"
+              ? label
+              : label?.[this.currentLanguage.code] ?? Object.values(label)[0]
+          }: ${chars
             .map(
               (i) =>
                 `<button class="k-button-character" type="button">${i}</button>`
