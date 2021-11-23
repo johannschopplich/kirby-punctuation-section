@@ -2,7 +2,7 @@
 
 This plugin provides a simple, **customizable** section for your Kirby project from which your clients can quickly copy commonly used characters to the clipboard.
 
-Translated labels are supported as well. See [usage](#usage) below.
+Label translations are supported as well. See [usage](#usage) below.
 
 <br>
 
@@ -49,7 +49,22 @@ fieldsets:
       - "“"
 ```
 
-Or use a more full fledged example, including support for **label translations**:
+Now, you're already good to go! Of course, you probably want to adapt the characters to your needs.
+
+Include the freshly created section anywhere in your pages blueprints:
+
+```yml
+sections:
+  punctuation: sections/punctuation-helper
+```
+
+> ℹ️ This Panel plugin uses the Clipboard API to write the character to the clipboard. It is only available to secure contexts, it cannot be used on `http:`-pages, only `https:`-pages.
+>
+> Setting a browser flag can allow HTTP pages to be interpreted as secure, which might help you for local development.
+
+## Full Example
+
+Take a look at the section blueprint below for a full fledged example, including **label translations**:
 
 <details>
 
@@ -108,15 +123,6 @@ fieldsets:
 ```
 
 </details>
-
-Now, you're already good to go! Of course, you probably want to adapt the characters to your needs.
-
-Include the freshly created section anywhere in your pages blueprints:
-
-```yml
-sections:
-  punctuation: sections/punctuation-helper
-```
 
 ## License
 
