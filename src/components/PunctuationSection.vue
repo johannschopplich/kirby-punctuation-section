@@ -31,7 +31,8 @@ export default {
 
   computed: {
     currentLanguage() {
-      return this.$store.state?.languages?.current ?? this.$language;
+      // `this.$language` is only available in Kirby 3.6+
+      return this?.$language ?? this.$store.state.languages.current;
     },
   },
 
@@ -49,7 +50,7 @@ export default {
           }: ${chars
             .map(
               (i) =>
-                `<button class="k-button-character" type="button">${i}</button>`
+                `<button class="k-button k-button-punctuation" type="button">${i}</button>`
             )
             .join(" ")}`
       )
@@ -76,7 +77,7 @@ export default {
 </script>
 
 <style>
-.k-button-character {
+.k-button-punctuation {
   background-color: var(--color-gray-300, #ddd);
   border-radius: var(--rounded-sm, 0.125rem);
   font-size: 1.25em;
@@ -85,13 +86,13 @@ export default {
   touch-action: manipulation;
 }
 
-.k-button-character:hover,
-.k-button-character:focus {
+.k-button-punctuation:hover,
+.k-button-punctuation:focus {
   background-color: var(--color-focus);
   color: white;
 }
 
-.k-button-character:not(:active):hover {
+.k-button-punctuation:not(:active):hover {
   transform: scale(1.25);
 }
 </style>
