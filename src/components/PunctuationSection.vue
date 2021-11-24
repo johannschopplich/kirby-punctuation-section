@@ -4,9 +4,24 @@
       {{ headline }}
     </k-headline>
 
-    <k-box :theme="theme" @click="handleClick">
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <k-text v-html="text" />
+    <k-box :theme="theme">
+      <k-text @click="handleClick">
+        <p
+          v-for="(category, index) in text"
+          :key="index"
+          class="k-text-punctuation"
+        >
+          <span>{{ category.label }}:</span>
+          <button
+            v-for="(char, charIndex) in category.chars"
+            :key="charIndex"
+            class="k-button k-button-punctuation"
+            type="button"
+          >
+            {{ char }}
+          </button>
+        </p>
+      </k-text>
     </k-box>
   </section>
 </template>
@@ -40,21 +55,13 @@ export default {
     const response = await this.load();
     this.headline = response.headline;
     this.theme = response.theme || "none";
-    this.text = this.fieldsets
-      .map(
-        ({ label, chars }) =>
-          `${
-            typeof label === "string"
-              ? label
-              : label?.[this.currentLanguage?.code] ?? Object.values(label)[0]
-          }: ${chars
-            .map(
-              (i) =>
-                `<button class="k-button k-button-punctuation" type="button">${i}</button>`
-            )
-            .join(" ")}`
-      )
-      .join("<br>");
+    this.text = this.fieldsets.map((i) => ({
+      ...i,
+      label:
+        typeof i.label === "string"
+          ? i.label
+          : i.label?.[this.currentLanguage?.code] ?? Object.values(i.label)[0],
+    }));
   },
 
   methods: {
@@ -77,12 +84,17 @@ export default {
 </script>
 
 <style>
+.k-text-punctuation > *:not(:last-child) {
+  margin-right: var(--spacing-1, 0.25rem);
+}
+
 .k-button-punctuation {
   background-color: var(--color-gray-300, #ddd);
   border-radius: var(--rounded-sm, 0.125rem);
   font-size: 1.25em;
   font-family: serif;
   padding: 0 var(--spacing-2, 0.5rem);
+  transition: none;
   touch-action: manipulation;
 }
 
@@ -90,6 +102,7 @@ export default {
 .k-button-punctuation:focus {
   background-color: var(--color-focus);
   color: white;
+  z-index: 1;
 }
 
 .k-button-punctuation:not(:active):hover {
