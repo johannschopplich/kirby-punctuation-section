@@ -6,7 +6,7 @@
 
     <k-box :theme="theme">
       <k-text @click="handleClick">
-        <p
+        <div
           v-for="(category, index) in text"
           :key="index"
           class="k-text-punctuation"
@@ -20,7 +20,7 @@
           >
             {{ char }}
           </button>
-        </p>
+        </div>
       </k-text>
     </k-box>
   </section>
