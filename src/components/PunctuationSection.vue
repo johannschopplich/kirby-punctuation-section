@@ -5,7 +5,7 @@
     </k-headline>
 
     <k-box :theme="theme">
-      <k-text @click="handleClick">
+      <k-text>
         <div
           v-for="(category, index) in text"
           :key="index"
@@ -17,6 +17,7 @@
             :key="charIndex"
             class="k-button k-button-punctuation"
             type="button"
+            @click="writeToClipboard(char)"
           >
             {{ char }}
           </button>
@@ -65,17 +66,15 @@ export default {
   },
 
   methods: {
-    async handleClick({ target }) {
-      if (!target.matches("button")) return;
-
+    async writeToClipboard(char) {
       try {
         // The Clipboard API is only available to secure contexts, it cannot be used
         // from a content script running on `http:`-pages, only `https:`-pages.
         // Setting a browser flag can allow HTTP pages to be interpreted as secure.
-        await navigator.clipboard.writeText(target.textContent);
+        await navigator.clipboard.writeText(char);
       } catch (error) {
         console.error(
-          `Failed writing "${target.textContent}" to clipboard. The Clipboard API is only available to secure contexts (HTTPS).`
+          `Failed writing "${char}" to clipboard. The Clipboard API is only available to secure contexts (HTTPS).`
         );
       }
     },
