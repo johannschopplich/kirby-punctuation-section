@@ -10,7 +10,7 @@ Label translations are supported as well. See [usage](#usage) below.
 
 ## Requirements
 
-- Kirby 3.5+
+- Kirby 3.6+
 
 ## Installation
 
@@ -126,4 +126,4 @@ fieldsets:
 
 ## License
 
-[MIT](./LICENSE) License © 2021 [Johann Schopplich](https://github.com/johannschopplich)
+[MIT](./LICENSE) License © 2021-2022 [Johann Schopplich](https://github.com/johannschopplich)
