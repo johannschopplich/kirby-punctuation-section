@@ -2,16 +2,18 @@
   "private": true,
   "scripts": {
     "dev": "kirbyup src/index.js --watch",
+    "serve": "kirbyup serve src/index.js",
     "build": "kirbyup src/index.js",
     "lint": "eslint \"src/**/*.{js,vue}\"",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write \"src/**/*.{js,vue}\""
+    "format": "prettier --write \"src/**/*.{js,vue}\"",
+    "release": "npx -y bumpp --commit --push --tag"
   },
   "devDependencies": {
-    "eslint": "^8.18.0",
+    "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.1.1",
-    "kirbyup": "^1.1.0",
+    "eslint-plugin-vue": "^9.4.0",
+    "kirbyup": "latest",
     "prettier": "^2.7.1"
   }
 }
