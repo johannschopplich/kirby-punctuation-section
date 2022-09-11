@@ -5,22 +5,26 @@
     </k-headline>
 
     <k-box :theme="theme">
-      <k-text>
-        <div
-          v-for="(category, index) in text"
-          :key="index"
-          class="k-text-punctuation"
-        >
-          <span>{{ category.label }}:</span>
-          <button
-            v-for="(char, charIndex) in category.chars"
-            :key="charIndex"
-            class="k-button k-button-punctuation"
-            type="button"
-            @click="writeToClipboard(char)"
-          >
-            {{ char }}
-          </button>
+      <k-text class="k-text-punctuation">
+        <div v-for="(category, index) in text" :key="index" class="space-x-1">
+          <span class="k-text-punctuation-label">{{ category.label }}:</span>
+          <div class="k-text-punctuation-group space-x-1">
+            <button
+              v-for="(char, charIndex) in category.chars"
+              :key="charIndex"
+              :class="[
+                'k-button k-button-punctuation',
+                {
+                  'is-active':
+                    char === activeChar && category.label === categoryIndex,
+                },
+              ]"
+              type="button"
+              @click="writeToClipboard(char, index)"
+            >
+              {{ char }}
+            </button>
+          </div>
         </div>
       </k-text>
     </k-box>
@@ -40,16 +44,11 @@ export default {
   data() {
     return {
       headline: null,
-      text: null,
+      text: [],
       theme: null,
+      activeChar: null,
+      categoryIndex: null,
     };
-  },
-
-  computed: {
-    currentLanguage() {
-      // `this.$language` is only available in Kirby 3.6+
-      return this.$store.state?.languages?.current ?? this?.$language;
-    },
   },
 
   async created() {
@@ -61,12 +60,12 @@ export default {
       label:
         typeof i.label === "string"
           ? i.label
-          : i.label?.[this.currentLanguage?.code] ?? Object.values(i.label)[0],
+          : i.label?.[this.$language?.code] ?? Object.values(i.label)[0],
     }));
   },
 
   methods: {
-    async writeToClipboard(char) {
+    async writeToClipboard(char, categoryIndex) {
       try {
         // The Clipboard API is only available to secure contexts, it cannot be used
         // from a content script running on `http:`-pages, only `https:`-pages.
@@ -76,35 +75,52 @@ export default {
         console.error(
           `Failed writing "${char}" to clipboard. The Clipboard API is only available to secure contexts (HTTPS).`
         );
+        return;
       }
+
+      this.activeChar = char;
+      this.categoryIndex = categoryIndex;
+      setTimeout(() => {
+        this.activeChar = null;
+        this.categoryIndex = null;
+      }, 2000);
     },
   },
 };
 </script>
 
 <style>
-.k-text-punctuation > *:not(:last-child) {
-  margin-right: var(--spacing-1, 0.25rem);
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  margin-left: var(--spacing-1);
+}
+
+.k-text-punctuation-label {
+  cursor: default;
+  user-select: none;
+}
+
+.k-text-punctuation-group {
+  display: inline-flex;
 }
 
 .k-button-punctuation {
-  background-color: var(--color-gray-300, #ddd);
-  border-radius: var(--rounded-sm, 0.125rem);
+  background-color: white;
+  border-radius: var(--rounded);
   font-size: 1.25em;
   font-family: serif;
-  padding: 0 var(--spacing-2, 0.5rem);
+  padding: 0 var(--spacing-2);
   transition: none;
   touch-action: manipulation;
 }
 
-.k-button-punctuation:hover,
-.k-button-punctuation:focus {
-  background-color: var(--color-focus);
+.k-button-punctuation.is-active {
+  background-color: var(--color-green-400);
   color: white;
   z-index: 1;
 }
 
-.k-button-punctuation:not(:active):hover {
-  transform: scale(1.25);
+.k-text-punctuation-group:hover
+  .k-button-punctuation:not(.is-active):not(:hover) {
+  background-color: var(--color-gray-200);
 }
 </style>
