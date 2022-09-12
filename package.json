@@ -1,13 +1,14 @@
 {
   "private": true,
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "dev": "kirbyup src/index.js --watch",
     "serve": "kirbyup serve src/index.js",
     "build": "kirbyup src/index.js",
     "lint": "eslint \"src/**/*.{js,vue}\"",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write \"src/**/*.{js,vue}\""
+    "format": "prettier --write \"src/**/*.{js,vue}\"",
+    "release": "npx -y bumpp --all"
   },
   "devDependencies": {
     "eslint": "^8.23.0",
