@@ -16,7 +16,7 @@
                 'k-button k-button-punctuation',
                 {
                   'is-active':
-                    char === activeChar && category.label === categoryIndex,
+                    char === activeChar && index === categoryIndex,
                 },
               ]"
               type="button"
