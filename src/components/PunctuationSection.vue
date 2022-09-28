@@ -6,26 +6,31 @@
 
     <k-box :theme="theme">
       <k-text class="k-text-punctuation">
-        <div v-for="(category, index) in text" :key="index" class="space-x-1">
-          <span class="k-text-punctuation-label">{{ category.label }}:</span>
-          <div class="k-text-punctuation-group space-x-1">
-            <button
-              v-for="(char, charIndex) in category.chars"
-              :key="charIndex"
-              :class="[
-                'k-button k-button-punctuation',
-                {
-                  'is-active':
-                    char === activeChar && index === categoryIndex,
-                },
-              ]"
-              type="button"
-              @click="writeToClipboard(char, index)"
-            >
-              {{ char }}
-            </button>
-          </div>
-        </div>
+        <table>
+          <tr v-for="(category, index) in text" :key="index" class="space-x-1">
+            <td>
+              <span class="k-text-punctuation-label">{{ category.label }}:</span>
+              <div class="k-text-punctuation-group space-x-1">
+                <button
+                  v-for="(char, charIndex) in category.chars"
+                  :key="charIndex"
+                  :class="[
+                    'k-button k-button-punctuation',
+                    {
+                      'is-active':
+                        char === activeChar && index === categoryIndex,
+                    },
+                  ]"
+                  type="button"
+                  @click="writeToClipboard(char, index)"
+                >
+                  {{ char }}
+                </button>
+              </div>
+            </td>
+            <td><k-text :html="category.help" /></td>
+          </tr>
+        </table>
       </k-text>
     </k-box>
   </section>
@@ -61,6 +66,12 @@ export default {
         typeof i.label === "string"
           ? i.label
           : i.label?.[this.$language?.code] ?? Object.values(i.label)[0],
+      help:
+        i.help
+          ? typeof i.help === "string"
+            ? i.help
+            : i.help?.[this.$language?.code] ?? Object.values(i.help)[0]
+          : false,
     }));
   },
 
@@ -96,6 +107,7 @@ export default {
 
 .k-text-punctuation-label {
   cursor: default;
+  padding-right: 1ch;
   user-select: none;
 }
 
@@ -122,5 +134,13 @@ export default {
 .k-text-punctuation-group:hover
   .k-button-punctuation:not(.is-active):not(:hover) {
   background-color: var(--color-gray-200);
+}
+
+.k-text-punctuation table {
+  width: 100%;
+}
+
+.k-text-punctuation tr {
+  vertical-align: top;
 }
 </style>
