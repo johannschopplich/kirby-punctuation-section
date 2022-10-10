@@ -6,9 +6,8 @@
 
     <k-box :theme="theme">
       <k-text class="k-text-punctuation">
-        <table>
-          <tr v-for="(category, index) in text" :key="index" class="space-x-1">
-            <td>
+        <k-grid v-for="(category, index) in text" :key="index">
+            <k-column v-bind:width="category.help ? '1/2' : '1/1'">
               <span class="k-text-punctuation-label">{{ category.label }}:</span>
               <div class="k-text-punctuation-group space-x-1">
                 <button
@@ -27,10 +26,9 @@
                   {{ char }}
                 </button>
               </div>
-            </td>
-            <td><k-text :html="category.help" /></td>
-          </tr>
-        </table>
+            </k-column>
+            <k-column v-if="category.help" v-bind:width="category.help ? '1/2' : '1/1'"><k-text :html="category.help" class="k-text-punctuation-help" /></k-column>
+        </k-grid>
       </k-text>
     </k-box>
   </section>
@@ -107,8 +105,8 @@ export default {
 
 .k-text-punctuation-label {
   cursor: default;
-  padding-right: 1ch;
   user-select: none;
+  padding-right: 1ch;
 }
 
 .k-text-punctuation-group {
@@ -123,6 +121,7 @@ export default {
   padding: 0 var(--spacing-2);
   transition: none;
   touch-action: manipulation;
+  margin: var(--spacing-px) 0;
 }
 
 .k-button-punctuation.is-active {
@@ -136,11 +135,13 @@ export default {
   background-color: var(--color-gray-200);
 }
 
-.k-text-punctuation table {
-  width: 100%;
+.k-text-punctuation-help {
+  padding-bottom: 1em;
 }
 
-.k-text-punctuation tr {
-  vertical-align: top;
+@media screen and (min-width: 65em) {
+  .k-text-punctuation-help {
+    padding-bottom: 0;
+  }
 }
 </style>
