@@ -1,6 +1,7 @@
 {
   "private": true,
   "version": "2.1.0",
+  "packageManager": "pnpm@7.16.1",
   "scripts": {
     "dev": "kirbyup src/index.js --watch",
     "serve": "kirbyup serve src/index.js",
@@ -11,9 +12,9 @@
     "release": "npx -y bumpp --all"
   },
   "devDependencies": {
-    "eslint": "^8.23.0",
+    "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^9.7.0",
     "kirbyup": "latest",
     "prettier": "^2.7.1"
   }
