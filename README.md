@@ -10,7 +10,7 @@ Label translations are supported as well. See [usage](#usage) below.
 
 ## Requirements
 
-- Kirby 3.6+
+- Kirby 3.7+
 
 ## Installation
 
@@ -47,6 +47,7 @@ fieldsets:
       - "‚"
       - "‘"
       - "“"
+    help: Use them to fill your text with smenatic life
 ```
 
 Now, you're already good to go! Of course, you probably want to adapt the characters to your needs.
