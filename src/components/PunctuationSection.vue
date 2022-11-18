@@ -6,26 +6,29 @@
 
     <k-box :theme="theme">
       <k-text class="k-text-punctuation">
-        <div v-for="(category, index) in text" :key="index" class="space-x-1">
-          <span class="k-text-punctuation-label">{{ category.label }}:</span>
-          <div class="k-text-punctuation-group space-x-1">
-            <button
-              v-for="(char, charIndex) in category.chars"
-              :key="charIndex"
-              :class="[
-                'k-button k-button-punctuation',
-                {
-                  'is-active':
-                    char === activeChar && index === categoryIndex,
-                },
-              ]"
-              type="button"
-              @click="writeToClipboard(char, index)"
-            >
-              {{ char }}
-            </button>
-          </div>
-        </div>
+        <k-grid v-for="(category, index) in text" :key="index">
+            <k-column v-bind:width="category.help ? '1/2' : '1/1'">
+              <span class="k-text-punctuation-label">{{ category.label }}:</span>
+              <div class="k-text-punctuation-group space-x-1">
+                <button
+                  v-for="(char, charIndex) in category.chars"
+                  :key="charIndex"
+                  :class="[
+                    'k-button k-button-punctuation',
+                    {
+                      'is-active':
+                        char === activeChar && index === categoryIndex,
+                    },
+                  ]"
+                  type="button"
+                  @click="writeToClipboard(char, index)"
+                >
+                  {{ char }}
+                </button>
+              </div>
+            </k-column>
+            <k-column v-if="category.help" v-bind:width="category.help ? '1/2' : '1/1'"><k-text :html="category.help" class="k-text-punctuation-help" /></k-column>
+        </k-grid>
       </k-text>
     </k-box>
   </section>
@@ -61,6 +64,12 @@ export default {
         typeof i.label === "string"
           ? i.label
           : i.label?.[this.$language?.code] ?? Object.values(i.label)[0],
+      help:
+        i.help
+          ? typeof i.help === "string"
+            ? i.help
+            : i.help?.[this.$language?.code] ?? Object.values(i.help)[0]
+          : false,
     }));
   },
 
@@ -97,6 +106,7 @@ export default {
 .k-text-punctuation-label {
   cursor: default;
   user-select: none;
+  padding-right: 1ch;
 }
 
 .k-text-punctuation-group {
@@ -111,6 +121,7 @@ export default {
   padding: 0 var(--spacing-2);
   transition: none;
   touch-action: manipulation;
+  margin: var(--spacing-px) 0;
 }
 
 .k-button-punctuation.is-active {
@@ -122,5 +133,15 @@ export default {
 .k-text-punctuation-group:hover
   .k-button-punctuation:not(.is-active):not(:hover) {
   background-color: var(--color-gray-200);
+}
+
+.k-text-punctuation-help {
+  padding-bottom: 1em;
+}
+
+@media screen and (min-width: 65em) {
+  .k-text-punctuation-help {
+    padding-bottom: 0;
+  }
 }
 </style>
