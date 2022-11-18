@@ -47,7 +47,7 @@ fieldsets:
       - "‚"
       - "‘"
       - "“"
-    help: Use them to fill your text with smenatic life
+    help: This is a description for the category
 ```
 
 Now, you're already good to go! Of course, you probably want to adapt the characters to your needs.
@@ -83,6 +83,9 @@ fieldsets:
       en: Apostrophe
     chars:
       - "’"
+    help:
+      de: Das ist eine Beschreibung der Kategorie
+      en: This is a description for the category
   - category:
     label:
       de: Gedankenstrich
