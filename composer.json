@@ -23,7 +23,7 @@
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {
-    "getkirby/cms": "^3.7"
+    "getkirby/cms": "^3.8"
   },
   "scripts": {
     "dist": "composer install --no-dev --optimize-autoloader"
