@@ -38,7 +38,7 @@ A bare minimum section example:
 
 ```yaml
 type: punctuation
-headline: Lil Punctuation Helper
+label: Lil Punctuation Helper
 fieldsets:
   - category:
     label: German Quotation Marks
@@ -72,7 +72,7 @@ Take a look at the section blueprint below for a full fledged example, including
 
 ```yaml
 type: punctuation
-headline:
+label:
   de: Kleine Interpunktionshilfe
   en: Lil Punctuation Helper
 fieldsets:
