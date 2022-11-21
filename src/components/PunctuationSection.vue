@@ -123,6 +123,7 @@ export default {
   font-size: 1.25em;
   font-family: serif;
   padding: 0 var(--spacing-2);
+  box-shadow: var(--shadow);
   transition: none;
   touch-action: manipulation;
 }
@@ -136,6 +137,7 @@ export default {
 .k-text-punctuation-group:hover
   .k-button-punctuation:not(.is-active):not(:hover) {
   background-color: var(--color-gray-200);
+  box-shadow: none;
 }
 
 .k-text-punctuation-help {
