@@ -7,7 +7,10 @@
     <k-box :theme="theme">
       <k-text class="k-text-punctuation space-y-1">
         <k-grid v-for="(category, index) in text" :key="index">
-          <k-column :width="category.help ? '1/2' : '1/1'">
+          <k-column
+            :width="category.help ? '1/2' : '1/1'"
+            class="k-column-punctuation"
+          >
             <span class="k-text-punctuation-label">{{ category.label }}:</span>
             <div class="k-text-punctuation-group space-x-1">
               <button
@@ -43,7 +46,10 @@ export default {
   mixins: [SectionMixin],
 
   props: {
-    fieldsets: Object,
+    fieldsets: {
+      type: Object,
+      required: true,
+    },
   },
 
   data() {
@@ -105,6 +111,11 @@ export default {
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
   margin-top: var(--spacing-1);
+}
+
+.k-column-punctuation {
+  display: flex;
+  align-items: center;
 }
 
 .k-text-punctuation-label {
