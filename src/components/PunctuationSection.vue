@@ -1,7 +1,7 @@
 <template>
   <section class="k-info-section">
     <k-headline class="k-info-section-headline">
-      {{ headline }}
+      {{ label }}
     </k-headline>
 
     <k-box :theme="theme">
