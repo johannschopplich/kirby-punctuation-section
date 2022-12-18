@@ -1,10 +1,8 @@
 <template>
-  <section class="k-info-section">
-    <header class="k-section-header">
-      <k-headline>
-        {{ headline }}
-      </k-headline>
-    </header>
+  <section class="k-punctuation-section">
+    <k-headline class="k-punctuation-section-label">
+      {{ label }}
+    </k-headline>
 
     <k-box :theme="theme">
       <k-text class="k-text-punctuation space-y-1">
@@ -56,7 +54,7 @@ export default {
 
   data() {
     return {
-      headline: null,
+      label: null,
       text: [],
       theme: null,
       activeChar: null,
@@ -66,7 +64,7 @@ export default {
 
   async created() {
     const response = await this.load();
-    this.headline = response.headline;
+    this.label = response.label || response.headline;
     this.theme = response.theme || "none";
     this.text = this.fieldsets.map((i) => ({
       ...i,
@@ -107,12 +105,8 @@ export default {
 </script>
 
 <style>
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  margin-left: var(--spacing-1);
-}
-
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: var(--spacing-1);
+.k-punctuation-section-label {
+  margin-bottom: var(--spacing-2);
 }
 
 .k-column-punctuation {
@@ -165,5 +159,13 @@ export default {
   .k-text-punctuation > .k-grid:not(:last-child) .k-text-punctuation-help {
     padding-bottom: 0;
   }
+}
+
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  margin-left: var(--spacing-1);
+}
+
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: var(--spacing-1);
 }
 </style>
