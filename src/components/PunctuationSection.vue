@@ -54,7 +54,7 @@ export default {
 
   data() {
     return {
-      headline: null,
+      label: null,
       text: [],
       theme: null,
       activeChar: null,
@@ -64,7 +64,7 @@ export default {
 
   async created() {
     const response = await this.load();
-    this.headline = response.headline;
+    this.label = response.label || response.headline;
     this.theme = response.theme || "none";
     this.text = this.fieldsets.map((i) => ({
       ...i,
