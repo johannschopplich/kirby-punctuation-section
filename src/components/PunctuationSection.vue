@@ -1,8 +1,10 @@
 <template>
   <section class="k-info-section">
-    <k-headline class="k-info-section-headline">
-      {{ label }}
-    </k-headline>
+    <header class="k-section-header">
+      <k-headline>
+        {{ headline }}
+      </k-headline>
+    </header>
 
     <k-box :theme="theme">
       <k-text class="k-text-punctuation space-y-1">
@@ -54,7 +56,7 @@ export default {
 
   data() {
     return {
-      label: null,
+      headline: null,
       text: [],
       theme: null,
       activeChar: null,
@@ -64,7 +66,7 @@ export default {
 
   async created() {
     const response = await this.load();
-    this.label = response.label || response.headline;
+    this.headline = response.headline;
     this.theme = response.theme || "none";
     this.text = this.fieldsets.map((i) => ({
       ...i,
