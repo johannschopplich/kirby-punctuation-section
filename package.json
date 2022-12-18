@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "2.1.4",
+  "version": "2.1.5",
   "packageManager": "pnpm@7.18.2",
   "scripts": {
     "dev": "kirbyup src/index.js --watch",
@@ -9,7 +9,7 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "format": "prettier --write \"src/**/*\"",
-    "release": "npx -y bumpp --all"
+    "release": "npm run build && npx -y bumpp --all"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
