@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "2.1.7",
+  "version": "2.1.8",
   "packageManager": "pnpm@7.18.2",
   "scripts": {
     "dev": "kirbyup src/index.js --watch",
