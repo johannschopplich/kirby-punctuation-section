@@ -1,19 +1,19 @@
 {
   "private": true,
   "version": "2.1.9",
-  "packageManager": "pnpm@7.18.2",
+  "packageManager": "pnpm@7.19.0",
   "scripts": {
-    "dev": "kirbyup src/index.js --watch",
-    "serve": "kirbyup serve src/index.js",
-    "build": "kirbyup src/index.js",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
-    "format": "prettier --write \"src/**/*\"",
+    "dev": "kirbyup src/panel/index.js --watch",
+    "serve": "kirbyup serve src/panel/index.js",
+    "build": "kirbyup src/panel/index.js",
+    "lint": "eslint src/panel",
+    "lint:fix": "eslint src/panel --fix",
+    "format": "prettier --write \"src/panel/**/*\"",
     "release": "npm run build && npx -y bumpp --all"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
-    "eslint": "^8.29.0",
+    "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
     "kirbyup": "latest",
     "prettier": "^2.8.1"

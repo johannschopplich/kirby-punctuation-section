@@ -1,4 +1,13 @@
-node_modules
-vendor
+# OS files
 .DS_Store
-composer.lock
+
+# Vendor files
+/node_modules
+/vendor
+
+# Cache and temporary files
+/.cache
+/.php-cs-fixer.cache
+/.phpunit.result.cache
+/tests/coverage
+/tests/*/tmp

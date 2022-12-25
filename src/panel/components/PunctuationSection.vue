@@ -64,7 +64,7 @@ export default {
 
   async created() {
     const response = await this.load();
-    this.label = response.label || response.headline;
+    this.label = response.label;
     this.theme = response.theme || "none";
     this.text = this.fieldsets.map((i) => ({
       ...i,
