@@ -1,5 +1,5 @@
 <?php
 
 \Kirby\Cms\App::plugin('johannschopplich/punctuation-section', [
-    'sections' => require 'src/extensions/sections.php',
+    'sections' => require __DIR__ . '/src/extensions/sections.php',
 ]);
