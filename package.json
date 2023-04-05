@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "2.1.10",
+  "version": "2.2.0",
   "packageManager": "pnpm@8.1.0",
   "scripts": {
     "dev": "kirbyup src/panel/index.js --watch",
