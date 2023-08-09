@@ -32,7 +32,7 @@ composer require johannschopplich/kirby-punctuation-section
 
 ## Usage
 
-Create a `section/punctuation-helper.yml` in your blueprints folder and add characters you want to provide for clipboard copying.
+Create a `sections/punctuation-helper.yml` in your blueprints folder and add characters you want to provide for clipboard copying.
 
 A bare minimum section example:
 
