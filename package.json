@@ -1,7 +1,7 @@
 {
   "private": true,
   "version": "2.2.0",
-  "packageManager": "pnpm@8.1.0",
+  "packageManager": "pnpm@8.6.12",
   "scripts": {
     "dev": "kirbyup src/panel/index.js --watch",
     "serve": "kirbyup serve src/panel/index.js",
@@ -13,9 +13,9 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.1.1",
-    "eslint": "^8.37.0",
-    "eslint-config-prettier": "^8.8.0",
-    "kirbyup": "next",
-    "prettier": "^2.8.7"
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "kirbyup": "^3.0.0",
+    "prettier": "^3.0.1"
   }
 }
