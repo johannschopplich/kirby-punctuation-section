@@ -30,12 +30,6 @@ composer require johannschopplich/kirby-punctuation-section
 
 Download and copy this repository to `/site/plugins/kirby-punctuation-section`.
 
-### Git Submodule
-
-```bash
-git submodule add https://github.com/johannschopplich/kirby-punctuation-section.git site/plugins/kirby-punctuation-section
-```
-
 ## Usage
 
 To get started, create a `sections/punctuation.yml` file in your blueprints folder and add the characters you want to use to the `chars` array. A bare minimum section example looks like this:
