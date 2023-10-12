@@ -24,12 +24,6 @@ export default {
     };
   },
 
-  watch: {
-    lastFocusedElement(value) {
-      console.log(value);
-    },
-  },
-
   async created() {
     document.addEventListener("focus", this.trackEditableFocus, {
       capture: true,

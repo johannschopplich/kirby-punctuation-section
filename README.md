@@ -2,9 +2,16 @@
 
 # Kirby Punctuation Section
 
-This plugin provides a simple, **customizable** section for your Kirby project from which your clients can quickly paste punctuation characters into their text or writer fields.
+This plugin provides a simple, **customizable** section for your Kirby project from which your customers can quickly add punctuation to their text or writer fields.
 
-Label translations are supported as well. See [usage](#usage) below.
+By default, clicking one of the punctuation buttons will insert the character at the current cursor position of a text or writer field.
+
+## Features
+
+- ♟️ Collect your favourite punctuation characters
+- 🪡 Insert characters at the current cursor position
+- 🖊️ Optionally paste characters to your clipboard
+- 🌐 Fully Translatable
 
 ## Requirements
 
@@ -31,13 +38,11 @@ git submodule add https://github.com/johannschopplich/kirby-punctuation-section.
 
 ## Usage
 
-Create a `sections/punctuation.yml` in your blueprints folder and add characters you want to provide for clipboard copying.
-
-A bare minimum section example:
+To get started, create a `sections/punctuation.yml` file in your blueprints folder and add the characters you want to use to the `chars` array. A bare minimum section example looks like this:
 
 ```yaml
 type: punctuation
-label: Lil Punctuation Helper
+label: Punctuations
 fieldsets:
   - category:
     label: German Quotation Marks
@@ -49,22 +54,33 @@ fieldsets:
     help: This is a description for the category
 ```
 
-Now, you're already good to go! Of course, you probably want to adapt the characters to your needs.
-
-Include the freshly created section anywhere in your pages blueprints:
+After that, you can add the section to your blueprint like this:
 
 ```yml
 sections:
   punctuation: sections/punctuation
 ```
 
-> ℹ️ This Panel plugin uses the Clipboard API to write the character to the clipboard. It is only available to secure contexts, it cannot be used on `http:`-pages, only `https:`-pages.
+## Clipboard API
+
+Instead of inserting the given character at the current cursor position, you can also copy it to your clipboard by setting the `clipboard` option to `true`:
+
+```yaml
+type: punctuation
+label: Punctuations
+clipboard: true
+```
+
+> [!NOTE]
+> The Clipboard API is only available for secure contexts, it cannot be used on non-HTTPS pages.
 >
-> Setting a browser flag can allow HTTP pages to be interpreted as secure, which might help you for local development.
+> Setting a browser flag can allow HTTP pages to be interpreted as secure, which can be useful for local development.
 
-## Label Translations
+## Label Translations & Help Texts
 
-Take a look at the section blueprint below for a full fledged example, including **label translations**:
+Just like other Kirby built-in sections, the `label` and `help` fields can be translated.
+
+Take a look at the section blueprint below for a full fledged example:
 
 ```yaml
 type: punctuation
