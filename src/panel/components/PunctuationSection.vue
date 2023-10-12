@@ -137,8 +137,8 @@ export default {
 <template>
   <k-section :headline="label">
     <k-box :theme="theme">
-      <div class="space-y-2">
-        <div v-for="(category, index) in text" :key="index">
+      <div class="container space-y-1">
+        <div v-for="(category, index) in text" :key="index" class="group">
           <div class="flex items-center gap-2">
             <span>{{ category.label }}:</span>
             <div class="flex items-center gap-1">
@@ -169,3 +169,18 @@ export default {
     </k-box>
   </k-section>
 </template>
+
+<style scoped>
+.container {
+  container-type: inline-size;
+}
+
+@container (min-width: 640px) {
+  .group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+}
+</style>
