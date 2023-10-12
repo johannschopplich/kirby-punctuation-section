@@ -5,9 +5,8 @@ return [
         include \Kirby\Cms\Section::$types['info'],
         [
             'props' => [
-                'fieldsets' => function (array $value = []) {
-                    return $value;
-                }
+                'fieldsets' => fn ($value = []) => $value,
+                'clipboard' => fn ($value = false) => $value
             ]
         ]
     )

@@ -1,44 +1,3 @@
-<template>
-  <section class="k-punctuation-section">
-    <k-headline class="k-punctuation-section-label">
-      {{ label }}
-    </k-headline>
-
-    <k-box :theme="theme">
-      <k-text class="k-text-punctuation space-y-1">
-        <k-grid v-for="(category, index) in text" :key="index">
-          <k-column
-            :width="category.help ? '1/2' : '1/1'"
-            class="k-column-punctuation"
-          >
-            <span class="k-text-punctuation-label">{{ category.label }}:</span>
-            <div class="k-text-punctuation-group space-x-1">
-              <button
-                v-for="(char, charIndex) in category.chars"
-                :key="charIndex"
-                :class="[
-                  'k-button k-button-punctuation',
-                  {
-                    'is-active': index === categoryIndex && char === activeChar,
-                  },
-                ]"
-                type="button"
-                @click="writeToClipboard(char, index)"
-              >
-                {{ char }}
-              </button>
-            </div>
-          </k-column>
-
-          <k-column v-if="category.help" :width="category.help ? '1/2' : '1/1'">
-            <k-text :html="category.help" class="k-text-punctuation-help" />
-          </k-column>
-        </k-grid>
-      </k-text>
-    </k-box>
-  </section>
-</template>
-
 <script>
 import SectionMixin from "~/mixins/section.js";
 
@@ -57,20 +16,46 @@ export default {
       label: null,
       text: [],
       theme: null,
+      clipboard: false,
       activeChar: null,
       categoryIndex: null,
+      lastFocusedElement: null,
+      lastSelection: null,
     };
   },
 
+  watch: {
+    lastFocusedElement(value) {
+      console.log(value);
+    },
+  },
+
   async created() {
+    document.addEventListener("focus", this.trackEditableFocus, {
+      capture: true,
+    });
+    document.addEventListener("blur", this.trackEditableFocus, {
+      capture: true,
+    });
+
     const response = await this.load();
     this.label = response.label;
     this.theme = response.theme || "none";
+    this.clipboard = response.clipboard || false;
     this.text = this.fieldsets.map((i) => ({
       ...i,
       label: this.t(i.label),
       help: i.help ? this.t(i.help) : false,
     }));
+  },
+
+  beforeDestroy() {
+    document.removeEventListener("focus", this.trackEditableFocus, {
+      capture: true,
+    });
+    document.removeEventListener("blur", this.trackEditableFocus, {
+      capture: true,
+    });
   },
 
   methods: {
@@ -80,92 +65,113 @@ export default {
         : value?.[this.$language?.code] ?? Object.values(value)[0];
     },
 
-    async writeToClipboard(char, categoryIndex) {
-      try {
-        // The Clipboard API is only available to secure contexts, it cannot be used
-        // from a content script running on `http:`-pages, only `https:`-pages.
-        // Setting a browser flag can allow HTTP pages to be interpreted as secure.
-        await navigator.clipboard.writeText(char);
-      } catch (error) {
-        console.error(
-          `Failed writing "${char}" to clipboard. The Clipboard API is only available to secure contexts (HTTPS).`
-        );
-        return;
-      }
+    trackEditableFocus(event) {
+      const element = event.target;
 
+      if (element.isContentEditable) {
+        this.lastFocusedElement = element;
+        this.lastSelection = window.getSelection().getRangeAt(0).cloneRange();
+      } else if (
+        element.tagName === "INPUT" ||
+        element.tagName === "TEXTAREA"
+      ) {
+        this.lastFocusedElement = element;
+        this.lastSelection = {
+          start: event.target.selectionStart,
+          end: event.target.selectionEnd,
+        };
+      }
+    },
+
+    async writeToClipboard(char, categoryIndex) {
       this.activeChar = char;
       this.categoryIndex = categoryIndex;
       setTimeout(() => {
         this.activeChar = null;
         this.categoryIndex = null;
       }, 2000);
+
+      if (this.clipboard) {
+        try {
+          // The Clipboard API is only available to secure contexts, it cannot be used
+          // from a content script running on `http:`-pages, only `https:`-pages.
+          // Setting a browser flag can allow HTTP pages to be interpreted as secure.
+          await navigator.clipboard.writeText(char);
+        } catch (error) {
+          const message = `Failed writing "${char}" to clipboard. The Clipboard API is only available to secure contexts (HTTPS).`;
+          console.error(message);
+          this.$store.dispatch("notification/error", message);
+        }
+      } else if (this.lastFocusedElement) {
+        if (this.lastFocusedElement.isContentEditable) {
+          const selection = window.getSelection();
+          selection.removeAllRanges();
+          selection.addRange(this.lastSelection);
+
+          const range = selection.getRangeAt(0);
+          const textNode = document.createTextNode(char);
+          range.insertNode(textNode);
+          range.setStartAfter(textNode);
+          range.setEndAfter(textNode);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        } else if (
+          this.lastFocusedElement.tagName === "INPUT" ||
+          this.lastFocusedElement.tagName === "TEXTAREA"
+        ) {
+          const start = this.lastFocusedElement.selectionStart;
+          const end = this.lastFocusedElement.selectionEnd;
+
+          this.lastFocusedElement.value =
+            this.lastFocusedElement.value.substring(0, start) +
+            char +
+            this.lastFocusedElement.value.substring(end);
+
+          // Set caret position after the inserted character
+          this.lastFocusedElement.selectionStart =
+            this.lastFocusedElement.selectionEnd = start + char.length;
+
+          // Restore focus position
+          this.lastFocusedElement.focus();
+        }
+      }
     },
   },
 };
 </script>
 
-<style>
-.k-punctuation-section-label {
-  margin-bottom: var(--spacing-2);
-}
+<template>
+  <k-section :headline="label">
+    <k-box :theme="theme">
+      <div class="space-y-2">
+        <div v-for="(category, index) in text" :key="index">
+          <div class="flex items-center gap-2">
+            <span>{{ category.label }}:</span>
+            <div class="flex items-center gap-1">
+              <k-button
+                v-for="(char, charIndex) in category.chars"
+                :key="charIndex"
+                variant="filled"
+                size="xs"
+                :class="[
+                  index === categoryIndex &&
+                    char === activeChar &&
+                    'outline outline-2 outline-[var(--color-focus)]',
+                ]"
+                @click="writeToClipboard(char, index)"
+              >
+                {{ char }}
+              </k-button>
+            </div>
+          </div>
 
-.k-column-punctuation {
-  display: flex;
-  align-items: center;
-}
-
-.k-text-punctuation-label {
-  cursor: default;
-  user-select: none;
-  padding-right: 1ch;
-}
-
-.k-text-punctuation-group {
-  display: inline-flex;
-}
-
-.k-button-punctuation {
-  background-color: white;
-  border-radius: var(--rounded);
-  font-size: 1.25em;
-  font-family: serif;
-  padding: 0 var(--spacing-2);
-  box-shadow: var(--shadow);
-  transition: none;
-  touch-action: manipulation;
-}
-
-.k-button-punctuation.is-active {
-  background-color: var(--color-green-400);
-  color: white;
-  z-index: 1;
-}
-
-.k-text-punctuation-group:hover
-  .k-button-punctuation:not(.is-active):not(:hover) {
-  background-color: var(--color-gray-200);
-  box-shadow: none;
-}
-
-.k-text-punctuation-help {
-  color: var(--color-gray-600);
-}
-
-.k-text-punctuation > .k-grid:not(:last-child) .k-text-punctuation-help {
-  padding-bottom: var(--spacing-1);
-}
-
-@media screen and (min-width: 65em) {
-  .k-text-punctuation > .k-grid:not(:last-child) .k-text-punctuation-help {
-    padding-bottom: 0;
-  }
-}
-
-.space-x-1 > :not([hidden]) ~ :not([hidden]) {
-  margin-left: var(--spacing-1);
-}
-
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  margin-top: var(--spacing-1);
-}
-</style>
+          <k-text
+            v-if="category.help"
+            :html="category.help"
+            class="text-[var(--color-text-dimmed)]"
+          />
+        </div>
+      </div>
+    </k-box>
+  </k-section>
+</template>

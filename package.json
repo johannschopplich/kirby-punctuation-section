@@ -1,21 +1,24 @@
 {
   "private": true,
   "version": "2.2.0",
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@8.9.0",
   "scripts": {
     "dev": "kirbyup src/panel/index.js --watch",
     "serve": "kirbyup serve src/panel/index.js",
     "build": "kirbyup src/panel/index.js",
     "lint": "eslint src/panel",
     "lint:fix": "eslint src/panel --fix",
-    "format": "prettier --write \"src/panel/**/*\"",
-    "release": "npm run build && npx -y bumpp --all"
+    "format": "prettier \"src/panel/**/*.{css,js,vue}\" --write",
+    "release": "pnpm run build && bumpp --all"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.1.1",
-    "eslint": "^8.46.0",
-    "eslint-config-prettier": "^9.0.0",
-    "kirbyup": "^3.0.0",
-    "prettier": "^3.0.1"
+    "@byjohann/eslint-config": "^0.2.2",
+    "autoprefixer": "^10.4.16",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.51.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "kirbyup": "^3.0.1",
+    "prettier": "^3.0.3",
+    "tailwindcss": "^3.3.3"
   }
 }
