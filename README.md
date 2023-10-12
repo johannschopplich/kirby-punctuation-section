@@ -15,7 +15,7 @@ By default, clicking one of the punctuation buttons will insert the character at
 
 ## Requirements
 
-> [!INFO]
+> [!NOTE]
 > The current version of this plugin requires Kirby 4 or higher. For Kirby 3 support, please use version 2 of Kirby Punctuation Section.
 
 ## Installation
