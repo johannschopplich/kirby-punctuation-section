@@ -10,9 +10,16 @@ Label translations are supported as well. See [usage](#usage) below.
 
 ## Requirements
 
-- Kirby 3.7+
+> [!INFO]
+> The current version of this plugin requires Kirby 4 or higher. For Kirby 3 support, please use version 2 of Kirby Punctuation Section.
 
 ## Installation
+
+### Composer
+
+```bash
+composer require johannschopplich/kirby-punctuation-section
+```
 
 ### Download
 
@@ -24,15 +31,9 @@ Download and copy this repository to `/site/plugins/kirby-punctuation-section`.
 git submodule add https://github.com/johannschopplich/kirby-punctuation-section.git site/plugins/kirby-punctuation-section
 ```
 
-### Composer
-
-```bash
-composer require johannschopplich/kirby-punctuation-section
-```
-
 ## Usage
 
-Create a `sections/punctuation-helper.yml` in your blueprints folder and add characters you want to provide for clipboard copying.
+Create a `sections/punctuation.yml` in your blueprints folder and add characters you want to provide for clipboard copying.
 
 A bare minimum section example:
 
@@ -56,7 +57,7 @@ Include the freshly created section anywhere in your pages blueprints:
 
 ```yml
 sections:
-  punctuation: sections/punctuation-helper
+  punctuation: sections/punctuation
 ```
 
 > ℹ️ This Panel plugin uses the Clipboard API to write the character to the clipboard. It is only available to secure contexts, it cannot be used on `http:`-pages, only `https:`-pages.
@@ -130,4 +131,4 @@ fieldsets:
 
 ## License
 
-[MIT](./LICENSE) License © 2021-2023 [Johann Schopplich](https://github.com/johannschopplich)
+[MIT](./LICENSE) License © 2021-PRESENT [Johann Schopplich](https://github.com/johannschopplich)
