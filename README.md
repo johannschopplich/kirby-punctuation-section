@@ -1,12 +1,10 @@
+![Kirby Punctuation Section](./.github/kirby-punctuation-section.png)
+
 # Kirby Punctuation Section
 
-This plugin provides a simple, **customizable** section for your Kirby project from which your clients can quickly copy commonly used characters to the clipboard.
+This plugin provides a simple, **customizable** section for your Kirby project from which your clients can quickly paste punctuation characters into their text or writer fields.
 
 Label translations are supported as well. See [usage](#usage) below.
-
-<br>
-
-![Preview of Kirby punctuation section plugin](./.github/kirby-punctuation-section-preview.gif)
 
 ## Requirements
 
@@ -64,13 +62,9 @@ sections:
 >
 > Setting a browser flag can allow HTTP pages to be interpreted as secure, which might help you for local development.
 
-## Full Example
+## Label Translations
 
 Take a look at the section blueprint below for a full fledged example, including **label translations**:
-
-<details>
-
-<summary>👀 Complete example</summary>
 
 ```yaml
 type: punctuation
@@ -126,8 +120,6 @@ fieldsets:
       - "…"
       - "×"
 ```
-
-</details>
 
 ## License
 
