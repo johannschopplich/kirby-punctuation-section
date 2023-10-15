@@ -25,13 +25,6 @@ export default {
   },
 
   async created() {
-    document.addEventListener("focus", this.trackEditableFocus, {
-      capture: true,
-    });
-    document.addEventListener("blur", this.trackEditableFocus, {
-      capture: true,
-    });
-
     const response = await this.load();
     this.label = response.label;
     this.theme = response.theme || "none";
@@ -43,13 +36,24 @@ export default {
     }));
   },
 
+  mounted() {
+    document.addEventListener("focus", this.handleEditabeFocus, {
+      capture: true,
+    });
+    document.addEventListener("blur", this.handleInputBlur, {
+      capture: true,
+    });
+    document.addEventListener("click", this.handleDocumentClick);
+  },
+
   beforeDestroy() {
-    document.removeEventListener("focus", this.trackEditableFocus, {
+    document.removeEventListener("focus", this.handleEditabeFocus, {
       capture: true,
     });
-    document.removeEventListener("blur", this.trackEditableFocus, {
+    document.removeEventListener("blur", this.handleInputBlur, {
       capture: true,
     });
+    document.removeEventListener("click", this.handleDocumentClick);
   },
 
   methods: {
@@ -59,21 +63,40 @@ export default {
         : value?.[this.$language?.code] ?? Object.values(value)[0];
     },
 
-    trackEditableFocus(event) {
+    handleEditabeFocus(event) {
       const element = event.target;
 
       if (element.isContentEditable) {
         this.lastFocusedElement = element;
         this.lastSelection = window.getSelection().getRangeAt(0).cloneRange();
-      } else if (
-        element.tagName === "INPUT" ||
-        element.tagName === "TEXTAREA"
-      ) {
+      }
+    },
+
+    handleInputBlur(event) {
+      const element = event.target;
+
+      if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
         this.lastFocusedElement = element;
         this.lastSelection = {
-          start: event.target.selectionStart,
-          end: event.target.selectionEnd,
+          start: element.selectionStart,
+          end: element.selectionEnd,
         };
+      }
+    },
+
+    handleDocumentClick(event) {
+      const target = event.target;
+
+      if (
+        !(
+          target.tagName === "BUTTON" && target.classList.contains("k-button")
+        ) &&
+        !target.isContentEditable &&
+        target.tagName !== "INPUT" &&
+        target.tagName !== "TEXTAREA"
+      ) {
+        this.lastFocusedElement = null;
+        this.lastSelection = null;
       }
     },
 
@@ -107,6 +130,8 @@ export default {
           range.insertNode(textNode);
           range.setStartAfter(textNode);
           range.setEndAfter(textNode);
+          this.lastSelection = range.cloneRange();
+
           selection.removeAllRanges();
           selection.addRange(range);
         } else if (
