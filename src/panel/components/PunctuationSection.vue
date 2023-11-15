@@ -9,6 +9,10 @@ export default {
       type: Object,
       required: true,
     },
+    clipboard: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -16,7 +20,6 @@ export default {
       label: null,
       text: [],
       theme: null,
-      clipboard: false,
       activeChar: null,
       categoryIndex: null,
       lastFocusedElement: null,
@@ -28,7 +31,6 @@ export default {
     const response = await this.load();
     this.label = response.label;
     this.theme = response.theme || "none";
-    this.clipboard = response.clipboard || false;
     this.text = this.fieldsets.map((i) => ({
       ...i,
       label: this.t(i.label),
@@ -160,14 +162,14 @@ export default {
 </script>
 
 <template>
-  <k-section :headline="label">
-    <k-box :theme="theme">
+  <KSection :headline="label">
+    <KBox :theme="theme">
       <div class="container space-y-1">
         <div v-for="(category, index) in text" :key="index" class="group">
           <div class="flex items-center gap-2">
             <span>{{ category.label }}:</span>
             <div class="flex items-center gap-1">
-              <k-button
+              <KButton
                 v-for="(char, charIndex) in category.chars"
                 :key="charIndex"
                 variant="filled"
@@ -180,19 +182,19 @@ export default {
                 @click="writeToClipboard(char, index)"
               >
                 {{ char }}
-              </k-button>
+              </KButton>
             </div>
           </div>
 
-          <k-text
+          <KText
             v-if="category.help"
             :html="category.help"
             class="text-[var(--color-text-dimmed)]"
           />
         </div>
       </div>
-    </k-box>
-  </k-section>
+    </KBox>
+  </KSection>
 </template>
 
 <style scoped>
