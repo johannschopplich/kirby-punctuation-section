@@ -162,14 +162,14 @@ export default {
 </script>
 
 <template>
-  <KSection :headline="label">
-    <KBox :theme="theme">
+  <k-section :headline="label">
+    <k-box :theme="theme">
       <div class="container space-y-1">
         <div v-for="(category, index) in text" :key="index" class="group">
           <div class="flex items-center gap-2">
             <span>{{ category.label }}:</span>
             <div class="flex items-center gap-1">
-              <KButton
+              <k-button
                 v-for="(char, charIndex) in category.chars"
                 :key="charIndex"
                 variant="filled"
@@ -182,19 +182,19 @@ export default {
                 @click="writeToClipboard(char, index)"
               >
                 {{ char }}
-              </KButton>
+              </k-button>
             </div>
           </div>
 
-          <KText
+          <k-text
             v-if="category.help"
             :html="category.help"
             class="text-[var(--color-text-dimmed)]"
           />
         </div>
       </div>
-    </KBox>
-  </KSection>
+    </k-box>
+  </k-section>
 </template>
 
 <style scoped>
