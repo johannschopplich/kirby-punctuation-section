@@ -9,6 +9,7 @@
     "tailwindcss/no-arbitrary-value": "off",
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/no-contradicting-classname": "error",
+    "vue/component-name-in-template-casing": "off",
     "vue/no-deprecated-destroyed-lifecycle": "off"
   }
 }
