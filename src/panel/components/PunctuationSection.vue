@@ -164,7 +164,7 @@ export default {
 </script>
 
 <template>
-  <k-section :headline="label">
+  <k-section :label="label">
     <k-box :theme="theme">
       <div class="container space-y-1">
         <div v-for="(category, index) in text" :key="index" class="group">
