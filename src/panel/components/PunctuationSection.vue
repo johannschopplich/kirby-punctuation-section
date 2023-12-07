@@ -60,9 +60,13 @@ export default {
 
   methods: {
     t(value) {
-      return typeof value === "string"
-        ? value
-        : value?.[this.$language?.code] ?? Object.values(value)[0];
+      if (Array.isArray(value)) {
+        return window.panel.multilang
+          ? value[this.$panel.language.code]
+          : Object.values(value)[0];
+      }
+
+      return value;
     },
 
     handleEditabeFocus(event) {
