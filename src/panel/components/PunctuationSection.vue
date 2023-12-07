@@ -61,9 +61,7 @@ export default {
   methods: {
     t(value) {
       if (Array.isArray(value)) {
-        return window.panel.multilang
-          ? value[this.$panel.language.code]
-          : Object.values(value)[0];
+        return value[this.$panel.translation.code] ?? Object.values(value)[0];
       }
 
       return value;
