@@ -168,7 +168,7 @@ export default {
         <div v-for="(category, index) in text" :key="index" class="group">
           <div class="flex items-center gap-2">
             <span>{{ category.label }}:</span>
-            <div class="flex items-center gap-1">
+            <k-button-group class="gap-1">
               <k-button
                 v-for="(char, charIndex) in category.chars"
                 :key="charIndex"
@@ -183,7 +183,7 @@ export default {
               >
                 {{ char }}
               </k-button>
-            </div>
+            </k-button-group>
           </div>
 
           <k-text
@@ -205,7 +205,7 @@ export default {
 @container (min-width: 640px) {
   .group {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
     align-items: start;
   }
