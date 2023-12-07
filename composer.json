@@ -2,7 +2,7 @@
   "name": "johannschopplich/kirby-punctuation-section",
   "description": "Insert punctuation marks into your text with a single click",
   "type": "kirby-plugin",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "keywords": [
     "clipboard",
     "kirby",
