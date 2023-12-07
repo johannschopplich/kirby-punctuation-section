@@ -41,10 +41,10 @@ fieldsets:
   - category:
     label: German Quotation Marks
     chars:
-      - "„"
-      - "‚"
-      - "‘"
-      - "“"
+      - „
+      - ‚
+      - ‘
+      - “
     help: This is a description for the category
 ```
 
@@ -87,7 +87,7 @@ fieldsets:
       de: Apostroph
       en: Apostrophe
     chars:
-      - "’"
+      - ’
     help:
       de: Das ist eine Beschreibung der Kategorie
       en: This is a description for the category
@@ -96,39 +96,39 @@ fieldsets:
       de: Gedankenstrich
       en: Hyphen
     chars:
-      - "–"
+      - –
   - category:
     label:
       de: Dt. Anführungszeichen
       en: German Quotation Marks
     chars:
-      - "„"
-      - "‚"
-      - "‘"
-      - "“"
+      - „
+      - ‚
+      - ‘
+      - “
   - category:
     label:
       de: Engl. Anführungszeichen
       en: English Quotation Marks
     chars:
-      - "“"
-      - "‘"
-      - "’"
-      - "”"
+      - “
+      - ‘
+      - ’
+      - ”
   - category:
     label: Guillemets
     chars:
-      - "»"
-      - "›"
-      - "‹"
-      - "«"
+      - »
+      - ›
+      - ‹
+      - «
   - category:
     label:
       de: Sonstiges
       en: Other
     chars:
-      - "…"
-      - "×"
+      - …
+      - ×
 ```
 
 ## License
