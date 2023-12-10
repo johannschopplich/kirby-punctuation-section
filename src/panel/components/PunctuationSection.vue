@@ -166,11 +166,11 @@ export default {
 <template>
   <k-section :label="label">
     <k-box :theme="theme">
-      <div class="container space-y-1">
+      <div class="container kps-space-y-1">
         <div v-for="(category, index) in text" :key="index" class="group">
-          <div class="flex items-center gap-2">
+          <div class="kps-flex kps-items-center kps-gap-2">
             <span>{{ category.label }}:</span>
-            <k-button-group class="gap-1">
+            <k-button-group class="kps-gap-1">
               <k-button
                 v-for="(char, charIndex) in category.chars"
                 :key="charIndex"
@@ -179,7 +179,7 @@ export default {
                 :class="[
                   index === categoryIndex &&
                     char === activeChar &&
-                    'outline outline-2 outline-[var(--color-focus)]',
+                    'kps-outline kps-outline-2 kps-outline-[var(--color-focus)]',
                 ]"
                 @click="writeToClipboard(char, index)"
               >
@@ -191,7 +191,7 @@ export default {
           <k-text
             v-if="category.help"
             :html="category.help"
-            class="text-[var(--color-text-dimmed)]"
+            class="kps-text-[var(--color-text-dimmed)]"
           />
         </div>
       </div>
