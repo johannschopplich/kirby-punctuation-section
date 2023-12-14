@@ -60,7 +60,7 @@ export default {
 
   methods: {
     t(value) {
-      if (Array.isArray(value)) {
+      if (Array.isArray(value) || typeof value === 'object') {
         return value[this.$panel.translation.code] ?? Object.values(value)[0];
       }
 
@@ -202,6 +202,7 @@ export default {
 <style scoped>
 .container {
   container-type: inline-size;
+  width: 100%;
 }
 
 @container (min-width: 640px) {
