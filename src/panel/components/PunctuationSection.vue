@@ -60,10 +60,7 @@ export default {
 
   methods: {
     t(value) {
-      if (typeof value === "string") {
-        return value;
-      }
-
+      if (!value || typeof value === "string") return value;
       return value[this.$panel.translation.code] ?? Object.values(value)[0];
     },
 
