@@ -60,11 +60,11 @@ export default {
 
   methods: {
     t(value) {
-      if (Array.isArray(value) || typeof value === 'object') {
-        return value[this.$panel.translation.code] ?? Object.values(value)[0];
+      if (typeof value === "string") {
+        return value;
       }
 
-      return value;
+      return value[this.$panel.translation.code] ?? Object.values(value)[0];
     },
 
     handleEditabeFocus(event) {
