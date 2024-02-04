@@ -1,9 +1,5 @@
 <script>
-import SectionMixin from "~/mixins/section.js";
-
 export default {
-  mixins: [SectionMixin],
-
   props: {
     fieldsets: {
       type: Object,
