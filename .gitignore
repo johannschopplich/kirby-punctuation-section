@@ -7,10 +7,14 @@
 
 # Build files
 /index.dev.mjs
+# /index.js
+# /index.css
 
 # Cache and temporary files
 /.cache
 /.php-cs-fixer.cache
-/.phpunit.result.cache
+/.phpunit.*
+/index.dev.mjs
 /tests/coverage
 /tests/*/tmp
+/tools/**/vendor

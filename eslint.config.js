@@ -4,9 +4,15 @@ export default await antfu(
   {
     stylistic: false,
     vue: {
+      // https://github.com/antfu/eslint-config/issues/367
+      sfcBlocks: {
+        blocks: {
+          styles: false,
+        },
+      },
       vueVersion: 2,
     },
-    ignores: ["**/vendor/**", "index.js"],
+    ignores: ["**/assets/**", "**/vendor/**", "index.js"],
   },
   {
     files: ["**/*.vue"],

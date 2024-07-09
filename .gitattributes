@@ -5,14 +5,19 @@
 
 # Source files
 scripts/ export-ignore
+src/assets/ export-ignore
 src/panel/ export-ignore
 kirbyup.config.js export-ignore
 postcss.config.cjs export-ignore
 prettier.config.mjs export-ignore
 tailwind.config.cjs export-ignore
 
+# Playground files
+playground/ export-ignore
+
 # Development files
 .vscode/ export-ignore
+tools/ export-ignore
 .editorconfig export-ignore
 composer.lock export-ignore
 eslint.config.js export-ignore
