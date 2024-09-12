@@ -111,7 +111,7 @@ export default {
           // from a content script running on `http:`-pages, only `https:`-pages.
           // Setting a browser flag can allow HTTP pages to be interpreted as secure.
           await navigator.clipboard.writeText(char);
-        } catch (error) {
+        } catch {
           const message = `Failed writing "${char}" to clipboard. The Clipboard API is only available to secure contexts (HTTPS).`;
           console.error(message);
           this.$store.dispatch("notification/error", message);
