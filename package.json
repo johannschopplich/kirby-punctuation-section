@@ -1,7 +1,7 @@
 {
   "name": "kirby-punctuation-section",
   "type": "module",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "private": true,
   "packageManager": "pnpm@9.10.0",
   "scripts": {
