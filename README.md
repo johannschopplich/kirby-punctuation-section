@@ -1,3 +1,8 @@
+> [!NOTE]
+> This plugin still works, however, I recommend to use the [Typo & Paste](https://github.com/philippoehrlein/typo-and-paste) plugin instead.
+>
+> Development on this plugin is stale. If you require updates, feel free to DM me.
+
 ![Kirby Punctuation Section](./.github/kirby-punctuation-section.png)
 
 # Kirby Punctuation Section
