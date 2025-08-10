@@ -20,10 +20,11 @@ playground/ export-ignore
 tools/ export-ignore
 .editorconfig export-ignore
 composer.lock export-ignore
-eslint.config.js export-ignore
+eslint.config.mjs export-ignore
 index.dev.mjs export-ignore
 package.json export-ignore
 pnpm-lock.yaml export-ignore
+pnpm-workspace.yaml export-ignore
 
 # Tests
 .codecov.yml export-ignore

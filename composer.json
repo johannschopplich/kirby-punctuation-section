@@ -2,7 +2,7 @@
   "name": "johannschopplich/kirby-punctuation-section",
   "description": "Insert punctuation marks into your text with a single click",
   "type": "kirby-plugin",
-  "version": "3.0.14",
+  "version": "3.1.0",
   "keywords": [
     "clipboard",
     "kirby",
@@ -22,7 +22,7 @@
     "getkirby/composer-installer": "^1.2"
   },
   "require-dev": {
-    "getkirby/cms": "^4"
+    "getkirby/cms": "^5"
   },
   "scripts": {
     "csfix": "@php tools/phpcs/vendor/bin/php-cs-fixer fix",
