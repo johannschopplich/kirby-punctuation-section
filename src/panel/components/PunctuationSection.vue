@@ -64,8 +64,12 @@ export default {
       const element = event.target;
 
       if (element.isContentEditable) {
+        const selection = window.getSelection();
+        if (selection.rangeCount === 0) {
+          return;
+        }
         this.lastFocusedElement = element;
-        this.lastSelection = window.getSelection().getRangeAt(0).cloneRange();
+        this.lastSelection = selection.getRangeAt(0).cloneRange();
       }
     },
 
